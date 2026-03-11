@@ -10,7 +10,6 @@ export interface CacheEntry {
   dependencies?: CollectCodeResult['dependencies'];
   totalSize: number;
   collectTime: number;
-  summaries?: CollectCodeResult['summaries'];
   timestamp: number;
   hash: string;
 }
@@ -77,7 +76,6 @@ export class CodeCache {
           dependencies: this.getDependenciesOrEmpty(entry.dependencies),
           totalSize: entry.totalSize,
           collectTime: entry.collectTime,
-          summaries: entry.summaries,
         };
       } else {
         this.memoryCache.delete(key);
@@ -103,7 +101,6 @@ export class CodeCache {
         dependencies: this.getDependenciesOrEmpty(entry.dependencies),
         totalSize: entry.totalSize,
         collectTime: entry.collectTime,
-        summaries: entry.summaries,
       };
     } catch (err) {
       logger.warn(`Cache read failed for ${url}: ${err instanceof Error ? err.message : String(err)}`);
@@ -125,7 +122,6 @@ export class CodeCache {
       dependencies: result.dependencies,
       totalSize: result.totalSize,
       collectTime: result.collectTime,
-      summaries: result.summaries,
       timestamp: Date.now(),
       hash,
     };
